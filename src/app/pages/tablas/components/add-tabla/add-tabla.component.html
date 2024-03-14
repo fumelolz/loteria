@@ -1,0 +1,39 @@
+<div style="height: 44px; text-align: center; margin-top: 12px;">
+  <span style="font-size: 24px"
+    >Número de cartas elegidas {{ cartasLength }}</span
+  >
+</div>
+
+<mat-form-field style="width: 100%;">
+  <mat-label>Nombre de la tabla</mat-label>
+  <input matInput placeholder="Nombre de la tabla" [formControl]="nombre">
+</mat-form-field>
+
+<div class="cont-main">
+  <div class="cont-checkbox" *ngFor="let carta of cartas; index as i">
+    <input
+      type="checkbox"
+      [id]="'myCheckbox-' + i"
+      (change)="cambio($event, carta.id)"
+    />
+    <label [for]="'myCheckbox-' + i">
+      <img [src]="'/assets/images/' + carta.id + '.jpeg'" />
+      <span class="cover-checkbox">
+        <svg viewBox="0 0 12 10">
+          <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+        </svg>
+      </span>
+      <div class="info">{{ carta.nombre }}</div>
+    </label>
+  </div>
+</div>
+
+<button
+  style="width: 100%; margin-top: 12px;"
+  mat-raised-button
+  color="warn"
+  (click)="crear()"
+  [disabled]="cartasLength < 12 || cartasLength > 12"
+>
+  Crear Tabla
+</button>
